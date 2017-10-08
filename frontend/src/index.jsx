@@ -1,45 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Weather from './components/weather.jsx';
+import Forecast from './components/forecast.jsx';
 
-const baseURL = process.env.ENDPOINT;
-
-const getWeatherFromApi = async () => {
-  try {
-    const response = await fetch(`${baseURL}/weather`);
-    return response.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {};
-};
-
-class Weather extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      icon: "",
-    };
-  }
-
-  async componentWillMount() {
-    const weather = await getWeatherFromApi();
-    this.setState({icon: weather.icon.slice(0, -1)});
+    this.state = { videos: [] };
   }
 
   render() {
-    const { icon } = this.state;
-
     return (
-      <div className="icon">
-        { icon && <img src={`/img/${icon}.svg`} /> }
+      <div>
+        <h1>Current Weather at Helsinki:</h1>
+        <Weather />
+        <Forecast />
       </div>
     );
   }
 }
 
 ReactDOM.render(
-  <Weather />,
+  <App />,
   document.getElementById('app')
 );

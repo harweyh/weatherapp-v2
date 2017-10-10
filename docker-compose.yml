@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   frontend:
@@ -10,8 +10,8 @@ services:
     ports: 
       - 8000:8000
     volumes:
-      - ./frontend:/opt/app
-      - nonodefront:/opt/app/node_modules
+      - ./frontend:/opt/src
+      - nonodefront:/opt/src/node_modules
     environment:
       - NODE_ENV=development
   backend:
@@ -23,8 +23,8 @@ services:
     ports: 
       - 9000:9000
     volumes:
-      - ./backend:/opt/app
-      - nonodeback:/opt/app/node_modules
+      - ./backend:/opt/src
+      - nonodeback:/opt/src/node_modules
 volumes:
   nonodefront:
   nonodeback:

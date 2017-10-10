@@ -1,6 +1,6 @@
 # weatherapp Backend Dockerfile
 FROM node:8.6.0
-RUN mkdir -p /opt/app
+RUN mkdir -p /opt/src
 
 ARG PORT=9000
 ENV PORT $PORT
@@ -11,8 +11,8 @@ COPY package.json /opt
 RUN npm install && npm cache clean --force
 ENV PATH /opt/node_modules/.bin:$PATH
 
-WORKDIR /opt/app
-COPY . /opt/app
+WORKDIR /opt/src
+COPY . /opt/src
 CMD npm start
 
 

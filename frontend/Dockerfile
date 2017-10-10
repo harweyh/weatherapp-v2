@@ -1,9 +1,18 @@
-#Weatherapp-v2 Frontend
+#Weatherapp Frontend
+
 FROM node:8.6.0
-EXPOSE 8000
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json package.json
+
+RUN mkdir -p /opt/app
+
+ARG PORT=8000
+ENV PORT $PORT
+EXPOSE $PORT
+
+WORKDIR /opt
+COPY package.json /opt
 RUN npm install && npm cache clean --force
-COPY . .
+ENV PATH /opt/node_modules/.bin:$PATH
+
+WORKDIR /opt/app
+COPY . /opt/app
 CMD npm start

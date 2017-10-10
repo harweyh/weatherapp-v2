@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Weather from './components/weather.jsx';
-import Forecast from './components/forecast.jsx';
+import Weather from './components/weather';
+import Forecast from './components/forecast';
 
 class App extends Component {
   constructor(props) {

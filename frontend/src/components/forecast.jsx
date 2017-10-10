@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import React from 'react';
 
 
@@ -8,7 +9,7 @@ const getForecastFromApi = async () => {
     const response = await fetch(`${baseURL}/forecast`);
     return response.json();
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 
   return {};
@@ -30,11 +31,11 @@ class Forecast extends React.Component {
   async componentWillMount() {
     const forecast = await getForecastFromApi();
     let hours = new Date(forecast.list[1].dt * 1000).getHours();
-    console.log(hours);
     if (hours === 0) {
       hours = 'midnight';
     } else if (hours > 12) {
-      hours = '{hours - 12 } PM';
+      hours -= 12;
+      hours += ' PM';
     } else {
       hours += ' AM';
     }
@@ -42,12 +43,13 @@ class Forecast extends React.Component {
     this.setState({ hours, icon });
   }
 
+
   render() {
     const { icon } = this.state;
     return (
       <div>
         <div>
-          <h1> At { this.state.hours } it is going to be { this.state.description }
+          <h1> At { this.state.hours } it is going to be:
           </h1>
         </div>
         <div className="icon"> <img src={`/img/${icon}.svg`} alt="forecast" />
